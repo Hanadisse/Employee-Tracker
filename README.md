@@ -1,1 +1,10 @@
-# MySQL Employee Trackker
+# Employee Tracker
+
+## Description
+
+## Dependencies
+
+## Video Demonstration
+
+## Contributors
+
