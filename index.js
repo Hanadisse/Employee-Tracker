@@ -37,7 +37,7 @@ function menu() {
     ])
     .then((res) => {
       if (res.choice == "View all Departments") {
-        // viewDepartments();
+        viewDepartments();
       } else if (res.choice == "View all Roles") {
         // viewRoles();
       } else if (res.choice == "View all Employees") {
@@ -54,4 +54,13 @@ function menu() {
         console.log("Goodbye!");
       }
     });
+}
+
+// View All Departments
+function viewDepartments() {
+  db.query(`SELECT * FROM department`, function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    menu();
+  });
 }
