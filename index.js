@@ -43,7 +43,7 @@ function menu() {
       } else if (res.choice == "View all Employees") {
         viewEmployees();
       } else if (res.choice == "Add a Department") {
-        // addDepartment();
+        addDepartment();
       } else if (res.choice == "Add a Role") {
         // addRole();
       } else if (res.choice == "Add a Employee") {
@@ -81,4 +81,23 @@ function viewEmployees() {
     console.table(res);
     menu();
   });
+}
+
+// Add New Department
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "departmentName",
+        message: "What is the name of the department?",
+      },
+    ])
+    .then((res) => {
+      db.query(`INSERT INTO department SET ?`, {
+        department_name: res.departmentName,
+      });
+      console.log(`Added ${res.departmentName} to the database`);
+      menu();
+    });
 }
