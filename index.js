@@ -45,7 +45,7 @@ function menu() {
       } else if (res.choice == "Add a Department") {
         addDepartment();
       } else if (res.choice == "Add a Role") {
-        // addRole();
+        addRole();
       } else if (res.choice == "Add a Employee") {
         // addEmployee();
       } else if (res.choice == "Update a Employee") {
@@ -98,6 +98,37 @@ function addDepartment() {
         department_name: res.departmentName,
       });
       console.log(`Added ${res.departmentName} to the database`);
+      menu();
+    });
+}
+
+// Add New Role
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "roleName",
+        message: "What is the name of the role?",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "What is the salary of the role?",
+      },
+      {
+        type: "input",
+        name: "roleDepartment",
+        message: "Which department does the role belong to?",
+      },
+    ])
+    .then((res) => {
+      db.query(`INSERT INTO roles SET ?`, {
+        title: res.roleName,
+        salary: res.salary,
+        department_id: res.roleDepartment,
+      });
+      console.log(`Added ${res.roleName} to the database`);
       menu();
     });
 }
