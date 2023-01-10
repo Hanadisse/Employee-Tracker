@@ -39,7 +39,7 @@ function menu() {
       if (res.choice == "View all Departments") {
         viewDepartments();
       } else if (res.choice == "View all Roles") {
-        // viewRoles();
+        viewRoles();
       } else if (res.choice == "View all Employees") {
         // viewEmployees();
       } else if (res.choice == "Add a Department") {
@@ -59,6 +59,15 @@ function menu() {
 // View All Departments
 function viewDepartments() {
   db.query(`SELECT * FROM department`, function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    menu();
+  });
+}
+
+// View All Roles
+function viewRoles() {
+  db.query(`SELECT * FROM roles`, function (err, res) {
     if (err) throw err;
     console.table(res);
     menu();
