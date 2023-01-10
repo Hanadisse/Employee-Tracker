@@ -47,7 +47,7 @@ function menu() {
       } else if (res.choice == "Add a Role") {
         addRole();
       } else if (res.choice == "Add a Employee") {
-        // addEmployee();
+        addEmployee();
       } else if (res.choice == "Update a Employee") {
         // updateEmployee();
       } else if (res.choice == "Quit") {
@@ -129,6 +129,43 @@ function addRole() {
         department_id: res.roleDepartment,
       });
       console.log(`Added ${res.roleName} to the database`);
+      menu();
+    });
+}
+
+// Add New Employee
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "What is the employee's first name?",
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "What is the employee's last name?",
+      },
+      {
+        type: "input",
+        name: "employeeRole",
+        message: "What is the employee's role id?",
+      },
+      {
+        type: "input",
+        name: "manager",
+        message: "What is the employee's manager id?",
+      },
+    ])
+    .then((res) => {
+      db.query(`INSERT INTO employee SET ?`, {
+        first_name: res.firstName,
+        last_name: res.lastName,
+        role_id: res.employeeRole,
+        manager_id: res.manager,
+      });
+      console.log(`Added ${res.firstName} ${res.lastName} to the database`);
       menu();
     });
 }
